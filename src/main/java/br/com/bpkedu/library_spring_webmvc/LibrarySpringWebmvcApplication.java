@@ -9,5 +9,4 @@ public class LibrarySpringWebmvcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LibrarySpringWebmvcApplication.class, args);
 	}
-
 }
