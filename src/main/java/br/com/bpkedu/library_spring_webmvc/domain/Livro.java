@@ -1,22 +1,31 @@
 package br.com.bpkedu.library_spring_webmvc.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "livros")
 public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
     private String autor;
     private Integer anoPublicacao;
     private String isbn;
     private String editora;
 
+    public Livro() {
+    }
+
+    public Livro(String titulo, String autor, Integer anoPublicacao, String isbn, String editora) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anoPublicacao = anoPublicacao;
+        this.isbn = isbn;
+        this.editora = editora;
+    }
 
     public String getEditora() {
         return editora;
@@ -66,5 +75,15 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 
-
+    @Override
+    public String toString() {
+        return "Livro{" +
+            "id=" + id +
+            ", titulo='" + titulo + '\'' +
+            ", autor='" + autor + '\'' +
+            ", anoPublicacao=" + anoPublicacao +
+            ", isbn='" + isbn + '\'' +
+            ", editora='" + editora + '\'' +
+            '}';
+    }
 }

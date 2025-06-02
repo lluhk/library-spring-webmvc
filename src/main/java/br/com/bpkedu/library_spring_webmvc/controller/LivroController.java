@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/livros")
 public class LivroController {
-    @Autowired
-    private LivroService livroService;
+
+
+    private final LivroService livroService;
+
+    public LivroController(LivroService livroService) {
+        this.livroService = livroService;
+    }
 
     @GetMapping("/listar")
     public String listarLivros(Model model) {
@@ -42,6 +47,15 @@ public class LivroController {
         model.addAttribute("livro", livroService.buscarPorId(id));
         return "livros/editar";
     }
+
+    @PostMapping("/editar/{id}")
+    public String atualizarLivro(@PathVariable Long id, @ModelAttribute Livro livro) {
+        livro.setId(id); // Garante que o ID do livro seja o mesmo da URL
+        livroService.salvar(livro); // Atualiza o livro no banco de dados
+        return "redirect:/livros/listar"; // Redireciona para a listagem de livros
+    }
+
+
 
     @GetMapping("/deletar/{id:\\d+}")
     public String deletarLivro(@PathVariable Long id) {
